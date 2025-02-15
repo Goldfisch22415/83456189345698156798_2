@@ -1,67 +1,63 @@
 import os
 import discord
 from discord.ext import commands
-import asyncio
 
+CHANNEL_ID = 1337092534152728667
+
+# Erstelle eine Instanz des Bots
 intents = discord.Intents.default()
-intents.members = True
-intents.message_content = True
+intents.messages = True
+intents.message_content = True  # Erforderlich für das Lesen von Nachrichten
+bot = commands.Bot(command_prefix="#", intents=intents)
 
-bot = commands.Bot(command_prefix="!", intents=intents)
+rules = """
+**§1 Respekt & Freundlichkeit**  
+Behandle alle Mitglieder mit **Respekt**. Beleidigungen, Diskriminierung oder Mobbing sind **strengstens verboten**.  
 
-ROLE_ID = 1335535087587954738
+**§2 Keine Hassrede & Belästigung**  
+Jegliche Form von **Rassismus, Sexismus, Homophobie oder andere diskriminierende Äußerungen** werden nicht toleriert.  
+
+**§3 Kein Spam & Werbung**  
+Das Spammen von Nachrichten, Emojis oder Links ist **nicht erlaubt**. Werbung für andere Server oder Produkte nur mit Erlaubnis des Teams.  
+
+**§4 Keine NSFW-Inhalte**  
+Pornografische, gewalttätige oder anderweitig unangemessene Inhalte sind **streng untersagt**.  
+
+**§5 Keine illegalen Aktivitäten**  
+Teile oder fördere keine illegalen Inhalte, Hacks oder Betrugsversuche.  
+
+**§6 Richtige Kanäle nutzen**  
+Poste deine Nachrichten **im richtigen Kanal** und halte dich an die jeweiligen Kanalregeln.  
+
+**§7 Anweisungen des Teams befolgen**  
+Admins und Moderatoren haben das letzte Wort. **Folge ihren Anweisungen**, um den Server fair und sicher zu halten.  
+
+**§8 Datenschutz & Sicherheit**  
+Teile **keine privaten Informationen** wie Adressen, Telefonnummern oder Passwörter.  
+
+**§9 Sprache & Verhalten**  
+Halte dich an die **Hauptsprache des Servers** und vermeide unnötige Provokationen oder Streitigkeiten.  
+
+**§10 Melde Verstöße**  
+Wenn du siehst, dass jemand gegen die Regeln verstößt, melde es einem **Moderator oder Admin**.  
+
+💡 *Mit dem Beitritt zu diesem Server erklärst du dich mit diesen Regeln einverstanden!*
+"""
 
 @bot.event
 async def on_ready():
+    print(f'Bot ist eingeloggt als {bot.user}')
 
-    await bot.tree.sync()
-    print(f"Bot ist online als {bot.user}")
+@bot.command()
+async def update(ctx):
+    channel = bot.get_channel(CHANNEL_ID)
+    if channel:
+        # Löscht alle Nachrichten im Channel
+        await channel.purge()
 
-@bot.event
-async def on_member_join(member: discord.Member):
-    """Erstellt für jedes neue Mitglied einen privaten Kanal und sendet eine Willkommensnachricht."""
-    guild = member.guild
-    overwrites = {
-        guild.default_role: discord.PermissionOverwrite(read_messages=False),
-        member: discord.PermissionOverwrite(read_messages=True)
-    }
-    channel = await guild.create_text_channel(name=f"welcome-{member.name}", overwrites=overwrites)
+        # Sendet die neue Nachricht mit Regeln
+        await channel.send("📜 **Serverregeln** 📜\n\n" + rules)
 
-    await channel.send(
-        f"**Herzlich willkommen** auf **GameHUB**, {member.mention}.\n\n"
-        "Wir freuen uns, dich hier begrüßen zu dürfen! Bitte nimm dir einen Moment Zeit, die Regeln durchzulesen, \n"
-        "damit wir gemeinsam eine freundliche und respektvolle Community aufbauen können.\n\n"
-        "**Schreibe `/accept`, um die Regeln zu akzeptieren und dem Server beizutreten.**"
-    )
-
-@bot.tree.command(name="accept", description="Akzeptiere die Regeln und erhalte die Mitgliedsrolle.")
-async def accept(interaction: discord.Interaction):
-    """Slash-Command, mit dem das Mitglied die Regeln akzeptiert, die Rolle erhält und der Kanal gelöscht wird."""
-    member = interaction.user  
-    guild = interaction.guild
-
-    role = guild.get_role(ROLE_ID)
-    if role is None:
-        await interaction.response.send_message("Fehler: Die Rolle existiert nicht!", ephemeral=True)
-        return
-
-    try:
-        await member.add_roles(role)
-    except discord.Forbidden:
-        await interaction.response.send_message("Keine Berechtigung, um die Rolle zu vergeben!", ephemeral=True)
-        return
-
-    await interaction.response.send_message(f"{member.mention}, du bist jetzt Mitglied!🎉")
-
-    await asyncio.sleep(2)
-
-    try:
-        await interaction.channel.delete()
-    except discord.Forbidden:
-        print("Fehler: Keine Berechtigung, um den Kanal zu löschen.")
-    except discord.HTTPException as e:
-        print(f"Ein Fehler ist aufgetreten: {e}")
-    
 #twichtig für alles
 from flask import Flask
 import threading
