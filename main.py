@@ -8,7 +8,7 @@ CHANNEL_ID = 1337092534152728667
 intents = discord.Intents.default()
 intents.messages = True
 intents.message_content = True  # Erforderlich für das Lesen von Nachrichten
-bot = commands.Bot(command_prefix="#", intents=intents)
+bot = commands.Bot(command_prefix="~", intents=intents)
 
 rules = """
 **§1 Respekt & Freundlichkeit**  
