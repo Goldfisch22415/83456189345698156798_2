@@ -2,10 +2,7 @@ import os
 import discord
 from discord.ext import commands
 
-# Channel-IDs definieren
 CHANNEL_ID = 1337092534152728667
-MUSIK_CHANNEL_ID = 1334629595642593311
-ALLGEMEIN_CHANNEL_ID = 1334619772536492083
 
 # Erstelle eine Instanz des Bots
 intents = discord.Intents.default()
@@ -55,22 +52,13 @@ async def on_ready():
 async def update(ctx):
     channel = bot.get_channel(CHANNEL_ID)
     if channel:
-        await channel.purge()
-        await channel.send("\u2696\ufe0f **Serverregeln** \n\n" + rules)
-
-@bot.command()
-async def musik(ctx):
-    channel = bot.get_channel(MUSIK_CHANNEL_ID)
-    if channel:
-        await channel.purge()
-        
-@bot.command()
-async def allgemein(ctx):
-    channel = bot.get_channel(ALLGEMEIN_CHANNEL_ID)
-    if channel:
+        # Löscht alle Nachrichten im Channel
         await channel.purge()
 
-# Wichtiger Health-Check Webserver
+        # Sendet die neue Nachricht mit Regeln
+        await channel.send("⚖️ **Serverregeln** \n\n" + rules)
+
+#twichtig für alles
 from flask import Flask
 import threading
 
@@ -78,11 +66,12 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return "OK", 200
+    return "OK", 200  # Antwort für den Health-Check
 
 def run_webserver():
     app.run(host="0.0.0.0", port=8000)
 
+# Starte den Webserver in einem eigenen Thread
 threading.Thread(target=run_webserver, daemon=True).start()
 
 bot.run(os.getenv("DISCORD_TOKEN"))
