@@ -26,19 +26,16 @@ Pornografische, gewalttätige oder anderweitig unangemessene Inhalte sind **stre
 **§5 Keine illegalen Aktivitäten**  
 Teile oder fördere keine illegalen Inhalte, Hacks oder Betrugsversuche.  
 
-**§6 Richtige Kanäle nutzen**  
-Poste deine Nachrichten **im richtigen Kanal** und halte dich an die jeweiligen Kanalregeln.  
-
-**§7 Anweisungen des Teams befolgen**  
+**§6 Anweisungen des Teams befolgen**  
 Admins und Moderatoren haben das letzte Wort. **Folge ihren Anweisungen**, um den Server fair und sicher zu halten.  
 
-**§8 Datenschutz & Sicherheit**  
+**§9 Datenschutz & Sicherheit**  
 Teile **keine privaten Informationen** wie Adressen, Telefonnummern oder Passwörter.  
 
-**§9 Sprache & Verhalten**  
+**§10 Sprache & Verhalten**  
 Halte dich an die **Hauptsprache des Servers** und vermeide unnötige Provokationen oder Streitigkeiten.  
 
-**§10 Melde Verstöße**  
+**§11 Melde Verstöße**  
 Wenn du siehst, dass jemand gegen die Regeln verstößt, melde es einem **Moderator oder Admin**.  
 
 💡 *Mit dem Beitritt zu diesem Server erklärst du dich mit diesen Regeln einverstanden!*
