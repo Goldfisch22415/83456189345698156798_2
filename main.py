@@ -56,7 +56,7 @@ async def update(ctx):
         await channel.purge()
 
         # Sendet die neue Nachricht mit Regeln
-        await channel.send("📜 **Serverregeln** 📜\n\n" + rules)
+        await channel.send("⚖️ **Serverregeln** \n\n" + rules)
 
 #twichtig für alles
 from flask import Flask
