@@ -38,8 +38,8 @@ Halte dich an die **Hauptsprache des Servers** und vermeide unnötige Provokatio
 **§11 Melde Verstöße**  
 Wenn du siehst, dass jemand gegen die Regeln verstößt, melde es einem **Moderator oder Admin**.  
 
-**§12 Wachstum der Community**
-Lade gerne alle deine Freunde auf unseren Server ein.
+🚨**INFO**
+Lade gerne **alle deine Freunde** auf unseren Server ein!
 
 💡 *Mit dem Beitritt zu diesem Server erklärst du dich mit diesen Regeln einverstanden!*
 """
